@@ -1,0 +1,50 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./styles.css";
+
+const publications = [
+  {year:"2024",title:"A novel heuristic of rigid docking scores positively correlates with full-length nuclear receptor LRH-1 regulation",journal:"Computational and Structural Biotechnology Journal",href:"https://doi.org/10.1016/j.csbj.2024.07.021"},
+  {year:"2022",title:"Statistical Analysis of Protein-Ligand Interaction Patterns in Nuclear Receptor RORγ",journal:"Frontiers in Molecular Biosciences",href:"https://doi.org/10.3389/fmolb.2022.904445"},
+  {year:"2021",title:"Protein conformational switch discerned via network centrality properties",journal:"Computational and Structural Biotechnology Journal",href:"https://doi.org/10.1016/j.csbj.2021.06.004"},
+];
+
+function NetworkField(){return <div className="network-field" aria-hidden="true"><span className="edge e1"/><span className="edge e2"/><span className="edge e3"/><span className="edge e4"/><span className="edge e5"/><span className="edge e6"/><span className="node n1"/><span className="node n2"/><span className="node n3"/><span className="node n4"/><span className="node n5"/><span className="node n6"/></div>}
+
+function App(){return <>
+  <header className="site-header">
+    <a className="brand" href="#top" aria-label="David Foutch home"><span className="brand-mark">DF</span><span>David Foutch</span></a>
+    <nav aria-label="Primary navigation"><a href="#research">Research</a><a href="#software">Software</a><a href="#publications">Publications</a><a href="#about">About</a></nav>
+    <a className="header-contact" href="mailto:davidfoutch42@gmail.com">Contact</a>
+  </header>
+  <main id="top">
+    <section className="hero section-shell">
+      <div className="hero-copy"><p className="eyebrow">Computational structural biology</p><h1>Protein structure is a network.<br/><em>That changes how we can learn from it.</em></h1><p className="hero-lede">I develop interpretable methods that translate protein structures into residue-level graphs, then use network analysis, structural-language models, and graph neural networks to investigate conformational change and ligand regulation.</p><div className="hero-actions"><a className="button primary" href="#research">Explore the work</a><a className="button secondary" href="https://github.com/davidfoutch">View GitHub</a></div></div>
+      <div className="hero-visual"><NetworkField/><figure className="portrait-card"><img src="/david-foutch.jpg" alt="David Foutch"/><figcaption><strong>David Foutch</strong><span>Published PSN researcher · Scientific software developer · ML practitioner</span></figcaption></figure></div>
+    </section>
+    <section className="evidence-band" aria-label="Research evidence"><div><strong>3</strong><span>peer-reviewed papers</span></div><div><strong>448 → 291</strong><span>KLIFS records to independent graphs</span></div><div><strong>4.5 Å</strong><span>heavy-atom PSN contact definition</span></div><div><strong>18</strong><span>LRH-1 structures analyzed</span></div></section>
+
+    <section id="research" className="section-shell research-section">
+      <div className="section-heading"><p className="eyebrow">Research program</p><h2>From structural contacts to testable representations</h2><p>The projects form one methodological progression rather than a collection of disconnected models.</p></div>
+      <div className="research-grid">
+        <article className="feature-card feature-card-wide"><div className="card-kicker">01 · Structural representation</div><h3>Protein structure networks</h3><p>Published work testing how network centralities respond to biologically meaningful conformational change—and when static contacts conceal dynamic signal.</p><ul><li>Residues become nodes; physical contacts become edges</li><li>Centrality connects local packing to global topology</li><li>PSN* removes persistent contacts to emphasize structural change</li></ul><a href="https://doi.org/10.1016/j.csbj.2021.06.004">Read the foundational paper <span>↗</span></a></article>
+        <article className="feature-card image-card"><img src="/lrh1-psn-analysis.png" alt="LRH-1 eigenvector centrality and protein structure network analysis"/><div><div className="card-kicker">02 · Ligand-regulated structure</div><h3>LRH-1 network analysis</h3><p>Docking, eigenvector centrality, and multivariate analysis across 18 crystal structures connected network organization with experimentally grounded compound prioritization.</p></div></article>
+        <article className="feature-card"><div className="card-kicker">03 · Structural language</div><h3>EGFR pocket representation learning</h3><p>Full-chain PSNs, KLIFS-centered two-hop subgraphs, and random walks were evaluated on 291 independent PDB-chain graphs.</p><div className="result-callout"><span>Key result</span><p>Raw visitation frequencies matched mean-pooled Word2Vec for αC-state classification—establishing the composition null that an order-sensitive model must beat.</p></div></article>
+        <article className="feature-card"><div className="card-kicker">04 · Direct graph learning</div><h3>Graph attention networks</h3><p>A pilot LRH-1 workflow compares graph definitions, engineers residue and contact features, and uses Integrated Gradients to inspect model attribution.</p><p className="honesty-note">Current status: promising workflow; split robustness and dataset limitations remain under active audit.</p></article>
+      </div>
+    </section>
+
+    <section id="software" className="software-section"><div className="section-shell software-inner">
+      <div className="software-copy"><p className="eyebrow">Scientific software</p><h2>PDB2Graph brings network analysis into PyMOL.</h2><p>PDB2Graph operationalizes peer-reviewed PSN methodology: construct residue-contact graphs from PDB coordinates, calculate graph-theoretic centralities, and map the results back onto interactive three-dimensional structures.</p><div className="tech-list"><span>Python</span><span>PyMOL</span><span>NetworkX</span><span>PyQt</span><span>Plotly</span></div><a className="button light" href="https://github.com/davidfoutch/pdb2graph">Inspect the repository</a></div>
+      <div className="software-diagram" aria-label="PDB2Graph workflow"><div className="workflow-step"><span>01</span><strong>PDB coordinates</strong><small>atomic structure</small></div><div className="workflow-arrow">↓</div><div className="workflow-step"><span>02</span><strong>Residue contacts</strong><small>heavy-atom PSN</small></div><div className="workflow-arrow">↓</div><div className="workflow-step"><span>03</span><strong>Network analysis</strong><small>centrality & topology</small></div><div className="workflow-arrow">↓</div><div className="workflow-step"><span>04</span><strong>3D interpretation</strong><small>PyMOL visualization</small></div></div>
+    </div></section>
+
+    <section id="publications" className="section-shell publications-section"><div className="section-heading compact"><p className="eyebrow">Peer-reviewed work</p><h2>Publications</h2></div><div className="publication-list">{publications.map(p=><a key={p.title} href={p.href} className="publication-row"><span className="publication-year">{p.year}</span><span className="publication-copy"><strong>{p.title}</strong><small>{p.journal}</small></span><span className="publication-arrow">↗</span></a>)}</div></section>
+
+    <section className="principles-section"><div className="section-shell principles-grid"><div><p className="eyebrow">Working philosophy</p><h2>Scale in understanding,<br/>not only in compute.</h2></div><blockquote>“In scientific domains, structure is not incidental; it is the problem. I build systems that make assumptions explicit, preserve interpretability, and support scientific inquiry rather than replace it.”</blockquote></div></section>
+
+    <section id="about" className="section-shell about-section"><div className="about-copy"><p className="eyebrow">About</p><h2>A structural biologist extending proven network methods into modern ML.</h2><p>I hold an MS in Genome Science and Technology and degrees in mathematics and experimental psychology. My work spans protein structure networks, clinical knowledge graphs, scientific visualization, graph learning, and GPU-based research infrastructure.</p><p>I am currently building validated public work at the intersection of computational structural biology and interpretable artificial intelligence.</p></div><aside className="contact-card"><span>Open to</span><h3>Research collaborations, computational biology roles, and scientific software partnerships.</h3><a href="mailto:davidfoutch42@gmail.com">davidfoutch42@gmail.com</a><div className="social-links"><a href="https://github.com/davidfoutch">GitHub</a><a href="https://linkedin.com/in/david-foutch-117b121bb">LinkedIn</a></div></aside></section>
+  </main>
+  <footer><span>© 2026 David Foutch</span><span>Agentic Graph AI · Structure-aware scientific machine learning</span></footer>
+</>}
+
+createRoot(document.getElementById("root")!).render(<StrictMode><App/></StrictMode>);
