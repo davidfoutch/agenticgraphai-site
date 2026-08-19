@@ -13,7 +13,7 @@ function NetworkField(){return <div className="network-field" aria-hidden="true"
 function App(){return <>
   <header className="site-header">
     <a className="brand" href="#top" aria-label="David Foutch home"><span className="brand-mark">DF</span><span>David Foutch</span></a>
-    <nav aria-label="Primary navigation"><a href="#research">Research</a><a href="#software">Software</a><a href="#publications">Publications</a><a href="#about">About</a></nav>
+    <nav aria-label="Primary navigation"><a href="#research">Research</a><a href="#interactive">Interactive</a><a href="#software">Software</a><a href="#publications">Publications</a><a href="#about">About</a></nav>
     <a className="header-contact" href="mailto:davidfoutch42@gmail.com">Contact</a>
   </header>
   <main id="top">
@@ -32,6 +32,15 @@ function App(){return <>
         <article className="feature-card"><div className="card-kicker">04 · Direct graph learning</div><h3>Graph attention networks</h3><p>A pilot LRH-1 workflow compares graph definitions, engineers residue and contact features, and uses Integrated Gradients to inspect model attribution.</p><p className="honesty-note">Current status: promising workflow; split robustness and dataset limitations remain under active audit.</p></article>
       </div>
     </section>
+
+    <section id="interactive" className="interactive-section"><div className="section-shell">
+      <div className="section-heading"><p className="eyebrow">Interactive science</p><h2>Inspect the structure, the network, and the learned signal.</h2><p>These browser-native molecular viewers connect the physical LRH-1 structure to its residue-interaction graph and, separately, to residue-level model attribution.</p></div>
+      <div className="viewer-stack">
+        <article className="viewer-card"><div className="viewer-copy"><span>01 · Published network workflow</span><h3>LRH-1 protein structure networks</h3><p>Compare RING-derived residue-interaction networks for 1YOK and 4PLD. Every displayed edge maps to Cα coordinates in the corresponding local PDB structure.</p><a href="/interactive/lrh1-psn-comparison.html" target="_blank" rel="noreferrer">Open full-screen ↗</a></div><iframe src="/interactive/lrh1-psn-comparison.html" title="Interactive comparison of 1YOK and 4PLD protein structure networks" loading="lazy"/></article>
+        <article className="viewer-card"><div className="viewer-copy"><span>02 · Interpretable graph learning</span><h3>GAT Integrated Gradients attribution</h3><p>The 1YOK heavy-atom contact graph uses the 7.0 Å condition and a minimum of eight atom-pair contacts. Sphere size and color encode the top 25 residue-level Integrated Gradients scores from the recovered negative-direction attribution table—not statistical significance or raw attention.</p><a href="/interactive/lrh1-gat-1yok-ig.html" target="_blank" rel="noreferrer">Open full-screen ↗</a></div><iframe src="/interactive/lrh1-gat-1yok-ig.html" title="Interactive 1YOK GAT Integrated Gradients attribution viewer" loading="lazy"/></article>
+      </div>
+      <p className="viewer-caveat">Interpretation note: Integrated Gradients describes sensitivity of a trained model prediction to its inputs. It does not, by itself, establish causal or statistical significance.</p>
+    </div></section>
 
     <section id="software" className="software-section"><div className="section-shell software-inner">
       <div className="software-copy"><p className="eyebrow">Scientific software</p><h2>PDB2Graph brings network analysis into PyMOL.</h2><p>PDB2Graph operationalizes peer-reviewed PSN methodology: construct residue-contact graphs from PDB coordinates, calculate graph-theoretic centralities, and map the results back onto interactive three-dimensional structures.</p><div className="tech-list"><span>Python</span><span>PyMOL</span><span>NetworkX</span><span>PyQt</span><span>Plotly</span></div><a className="button light" href="https://github.com/davidfoutch/pdb2graph">Inspect the repository</a></div>
